@@ -11,29 +11,34 @@ const home = `
     
 `;
 
-const curriculo =`
-    <h4>Curriculo</h4>
+const curriculo = `
+    <div>
+        <h3>Curriculo</h3>
+        <div>
+            <h4>Formação e Experiências Acadêmicas</h4>
+            <p>Cursando ADS no IFPB, Fui monitora de algoritmos e lógica de programação.<br>
+            Estou partipando de um projeto de extensão no qual estou desenvolvendo aplicativo com React Native para criar um ambiente gamificado Crealit como ferramenta de incentivo à leitura, de livros clássicos da literatura brasileira. 
+            </p>
+        </div>
+        <div>
+            <h4>Experiências Profissionais</h4>
+            <p>Em busca do primiero emprego na área de TI, desenvolvedora font-end <br>
+            Trabalhei dois anos como Assistente Financeiro, cursei dois semestres de Contabilidade na Unopar </p>
+        </div>
+            
+    </div>
   
-    <ul>
-        <h5>Formação e experiencias academicas</h5>
-        <li>Cursando ADS no IFPB, Fui monitora de algoritmos e lógica de programação.<br>
-         Estou partipando de um projeto de extensão no qual estou desenvolvendo aplicativo com React Native para criar um aambiente gamificado Crealit como ferramenta de incentivo à leitura, de livros clássicos da literatura brasileira  
-        </li>
-        <h5>Experincias profissionais</h5>
-        <li>Em busca do primiero emprego na area de TI</li>
-        
-    </ul>
 
 `;
 
 
 
 
-const server = http.createServer((req,res) => {
+const server = http.createServer((req, res) => {
     // normaliza a url removendo a querystring e a barra final
     // opcional e usando letras minúsculas
     const path = req.url.replace(/\/?(?:\?.*)?$/, '').toLowerCase()
-    switch(path) {
+    switch (path) {
         case '':
             res.writeHead(200, { 'Content-Type': 'text/html; charset= utf-8' })
             res.end(home)
