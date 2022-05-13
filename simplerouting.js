@@ -27,7 +27,6 @@ const curriculo = `
         </div>
             
     </div>
-  
 
 `;
 
