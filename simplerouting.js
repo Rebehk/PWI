@@ -30,6 +30,26 @@ const curriculo = `
 
 `;
 
+const blog = `
+    <div>
+        <div>
+            <h3>
+                <a href="https://semiaridodevisu.ifsertao-pe.edu.br/index.php/rsdv/article/view/303"
+                title="Gamificando clássicos literários com o jogo Crealit "> Gamificando clássicos literários com o jogo Crealit </a>
+            </h3>
+            <h3>
+                <a href="https://blog.brkambiental.com.br/consumo-de-carne/"
+                title="Consumo de carne: construir diálogos sobre a redução é fundamental ">Consumo de carne: construir diálogos sobre a redução é fundamentalt </a>
+            </h3>
+            <h3>
+                <a href="https://canaltech.com.br/entretenimento/series-mais-assistidas-semana-08052022/"
+                title="As 10 séries mais assistidas da semana (08/05/2022) "> As 10 séries mais assistidas da semana (08/05/2022) </a>
+            </h3>
+        
+    </div>
+    
+`;
+
 
 
 
@@ -45,6 +65,10 @@ const server = http.createServer((req, res) => {
         case '/curriculo':
             res.writeHead(200, { 'Content-Type': 'text/html; charset= utf-8' })
             res.end(curriculo)
+            break
+        case '/blog':
+            res.writeHead(200, { 'Content-Type': 'text/html; charset= utf-8' })
+            res.end(blog)
             break
         default:
             res.writeHead(404, { 'Content-Type': 'text/plain; charset= utf-8' })
