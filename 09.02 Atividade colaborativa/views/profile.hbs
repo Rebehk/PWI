@@ -1,14 +1,17 @@
-{{> _header}}
-
-{{#if ((currentUser) && (currentUser.id === user.id)) }}
-  <a href="/edit" class="pull-right">Atualize seu perfil</a>
+{{#if (isOwnProfile currentUser user)}}
+    <div class="pull-right">
+        <a style=" color:chartreuse; margin-bottom: 4px;" href="/edit" class="nav-link btn btn-outline-success perfilBtn">Atualize seu perfil</a>
+        <a style="color:rgb(240, 103, 130); margin-bottom: 4px;" href="/delete" class="nav-link btn btn-outline-danger perfilBtn">Excluir Perfil</a>
+    </div>
 {{/if}}
 
-<h1>{{ user.name() }}</h1>
-<h2>Cadastrou-se em {{= user.createdAt }}</h2>
+<h1>{{getName user}}</h1>
+<h2>{{getBio user}}</h2>
 
-{{#if (user.bio)  }}
-  <p>{{= user.bio }}</p>
+{{#if (getBio user)}}
+    <p class="text-success">Cadastrou-se em {{getCreatedAt user}}</p>
 {{/if}}
 
-{{> _footer }}
+<a href="/">
+        <button class="btn btn-outline-success">Voltar</button>
+</a>

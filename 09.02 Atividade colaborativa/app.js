@@ -1,12 +1,12 @@
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const handlebars = require('express-handlebars');
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const path = require("path");
 const session = require("express-session");
+const Handlebars = require("express-handlebars");
 
 const setUpPassport = require("./setuppassport");
 const routes = require("./routes");
@@ -16,14 +16,15 @@ mongoose.connect("mongodb://localhost:27017/test");
 setUpPassport();
 
 app.set("port", process.env.PORT || 3000);
-app.engine('.hbs', handlebars.engine({
+
+app.engine('.hbs', Handlebars.engine({
+  layoutsDir: './views/layouts',
   defaultLayout: 'main',
   extname: '.hbs',
-  partialsDir: __dirname + '/views/partials',
-  layoutsDir: __dirname + '/views/layouts'
+  helpers: require("./utils/handlebars_helpers.js")
 }));
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
+app.set('view engine', '.hbs');
+app.set('views', './views');
 
 app.use(express.static(path.join(__dirname, "public")));
 

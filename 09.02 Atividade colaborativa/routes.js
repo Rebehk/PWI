@@ -31,6 +31,7 @@ router.get("/", function (req, res, next) {
     });
 });
 
+
 router.get("/login", function (req, res) {
   res.render("login");
 });
@@ -45,7 +46,7 @@ router.post(
 );
 
 router.get("/logout", function (req, res) {
-  req.logout();
+  req.logout(User)
   res.redirect("/");
 });
 
@@ -98,6 +99,31 @@ router.get("/edit", ensureAuthenticated, function (req, res) {
   res.render("edit");
 });
 
+router.get("/delete", ensureAuthenticated, function (req, res) {
+  res.render("delete");
+});
+
+router.post("/delete", ensureAuthenticated, function (req, res) {
+  res.locals.currentUser.checkPassword(req.body.confirmationPassword, async function(err, isMatch) {
+    if(err) {
+      return next(err);
+    }
+    if(isMatch) {
+      const response = await User.deleteOne({ _id: res.locals.currentUser._id });
+      if(response.deletedCount) {
+        req.flash("info", "Conta Excluída com Sucesso.");
+        res.redirect("/");
+      } else {
+        req.flash("error", "Não conseguimos excluir sua conta.");
+        res.redirect("/");
+      }
+    } else {
+      req.flash("error", "Senha incorreta.");
+      res.redirect("/delete");
+    }
+  });
+});
+
 router.post("/edit", ensureAuthenticated, function (req, res, next) {
   req.user.displayName = req.body.displayname;
   req.user.bio = req.body.bio;
@@ -107,7 +133,7 @@ router.post("/edit", ensureAuthenticated, function (req, res, next) {
       return;
     }
     req.flash("info", "Pefil atualizado!");
-    res.redirect("/edit");
+    res.redirect("/");
   });
 });
 

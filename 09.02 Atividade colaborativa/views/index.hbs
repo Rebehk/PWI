@@ -1,21 +1,24 @@
-{{>_header}}
+<h1>Boas-vindas ao <span class="text-success">Mini Bios</span>!</h1>
 
-<h1>Boas-vindas ao Mini Bios!</h1>
-
-
-{{#each users}}
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <a href="/users/ {{username}}">
-        {{username}}
-      </a>
-    </div>
-    {{#if (bio)}}
-      <div class="panel-body">{{bio}}</div>
-    {{/if}}
-  </div>
-
-{{/each}}
-
-{{>_footer}}
+        
+<div>
+    {{#each users}}
+        <a href="/users/{{getUsername this}}">
+            <div class="btn btn-outline-success users" style="margin-bottom: 10px;">
+                <div class="card-heading bg-outline-success">
+                    <a class="nav-link" href="/users/{{getUsername this}}">
+                        {{getName this}}
+                    </a>
+                </div>
+                {{#if (getBio this)}}
+                    <div class="card-body">
+                        <a class="nav-link" href="/users/{{getUsername this}}">
+                        {{getBio this}}
+                    </a>
+                                
+                    </div>
+                {{/if}}
+            </div>
+        </a>
+    {{/each}}
+</div>

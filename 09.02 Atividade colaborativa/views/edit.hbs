@@ -1,13 +1,19 @@
-{{> _header }}
-
 <h1>Atualize seu perfil</h1>
 
 <form action="/edit" method="post">
-  <input name="displayname" type="text" class="form-control" placeholder="Nome de exibição"
-         value="{{ currentUser.displayName || "" }}">
-  <textarea name="bio" class="form-control"
-            placeholder="Conte um pouco sobre você!">{{ currentUser.bio || "" }}</textarea>
-  <input type="submit" value="Atualizar" class="btn btn-primary btn-block">
+    <div>
+        <label for="displayname" class="form-label fLbl">
+            Nome do Perfil:
+        </label>
+        <input name="displayname" type="text" class="form-control" placeholder="Nome de exibição" value="{{getName currentUser}}">
+    </div>
+    <div>
+        <label for="bio" class="form-label fLbl">
+            Bio:
+        </label>
+        <textarea id="bioBox" name="bio" class="form-control" placeholder="Conte um pouco sobre você!">{{getBio currentUser}}</textarea>
+    </div>
+    
+    <input type="submit" value="Atualizar" class="btn btn-success btn-block">
+    
 </form>
-
-{{> _footer }}
